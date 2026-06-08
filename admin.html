@@ -1,0 +1,1123 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Admin Dashboard | EcoVote</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <style>
+
+        * {
+
+            margin: 0;
+
+            padding: 0;
+
+            box-sizing: border-box;
+
+        }
+
+
+
+        body {
+
+            font-family: 'Inter', sans-serif;
+
+            background: #1a202c;
+
+            min-height: 100vh;
+
+        }
+
+
+
+        .container {
+
+            max-width: 1400px;
+
+            margin: 0 auto;
+
+            padding: 2rem;
+
+        }
+
+
+
+        /* Header */
+
+        .header {
+
+            background: #2d3748;
+
+            border-radius: 1rem;
+
+            padding: 1.5rem 2rem;
+
+            margin-bottom: 2rem;
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            flex-wrap: wrap;
+
+        }
+
+
+
+        .logo h1 {
+
+            color: white;
+
+            font-size: 1.5rem;
+
+        }
+
+
+
+        .logo span {
+
+            color: #9f7aea;
+
+        }
+
+
+
+        .admin-badge {
+
+            background: #9f7aea;
+
+            color: white;
+
+            padding: 0.5rem 1rem;
+
+            border-radius: 2rem;
+
+            font-weight: 600;
+
+        }
+
+
+
+        /* Grid Layout */
+
+        .dashboard-grid {
+
+            display: grid;
+
+            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+
+            gap: 2rem;
+
+            margin-bottom: 2rem;
+
+        }
+
+
+
+        /* Cards */
+
+        .card {
+
+            background: white;
+
+            border-radius: 1rem;
+
+            padding: 1.5rem;
+
+            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
+
+        }
+
+
+
+        .card-title {
+
+            font-size: 1.3rem;
+
+            font-weight: 700;
+
+            margin-bottom: 1rem;
+
+            color: #2d3748;
+
+            border-bottom: 2px solid #e2e8f0;
+
+            padding-bottom: 0.5rem;
+
+        }
+
+
+
+        /* Forms */
+
+        .form-group {
+
+            margin-bottom: 1rem;
+
+        }
+
+
+
+        label {
+
+            display: block;
+
+            font-weight: 600;
+
+            margin-bottom: 0.5rem;
+
+            color: #4a5568;
+
+        }
+
+
+
+        input, select, textarea {
+
+            width: 100%;
+
+            padding: 0.75rem;
+
+            border: 1px solid #e2e8f0;
+
+            border-radius: 0.5rem;
+
+            font-family: 'Inter', sans-serif;
+
+            font-size: 0.9rem;
+
+        }
+
+
+
+        input:focus, select:focus, textarea:focus {
+
+            outline: none;
+
+            border-color: #9f7aea;
+
+            ring: 2px solid #9f7aea;
+
+        }
+
+
+
+        .btn-primary {
+
+            background: #9f7aea;
+
+            color: white;
+
+            border: none;
+
+            padding: 0.75rem 1.5rem;
+
+            border-radius: 0.5rem;
+
+            font-weight: 600;
+
+            cursor: pointer;
+
+            width: 100%;
+
+            font-size: 1rem;
+
+            transition: background 0.2s;
+
+        }
+
+
+
+        .btn-primary:hover {
+
+            background: #805ad5;
+
+        }
+
+
+
+        .btn-secondary {
+
+            background: #48bb78;
+
+            color: white;
+
+            border: none;
+
+            padding: 0.5rem 1rem;
+
+            border-radius: 0.5rem;
+
+            cursor: pointer;
+
+            font-size: 0.85rem;
+
+        }
+
+
+
+        /* Elections List */
+
+        .elections-list {
+
+            margin-top: 1rem;
+
+        }
+
+
+
+        .election-item {
+
+            background: #f7fafc;
+
+            border-radius: 0.75rem;
+
+            padding: 1rem;
+
+            margin-bottom: 1rem;
+
+            border-left: 4px solid #9f7aea;
+
+        }
+
+
+
+        .election-header {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            margin-bottom: 0.5rem;
+
+            flex-wrap: wrap;
+
+        }
+
+
+
+        .election-title {
+
+            font-weight: 700;
+
+            font-size: 1.1rem;
+
+            color: #2d3748;
+
+        }
+
+
+
+        .election-status {
+
+            font-size: 0.75rem;
+
+            padding: 0.2rem 0.5rem;
+
+            border-radius: 1rem;
+
+            background: #c6f6d5;
+
+            color: #22543d;
+
+        }
+
+
+
+        .candidate-list {
+
+            margin: 0.75rem 0;
+
+            padding-left: 1rem;
+
+        }
+
+
+
+        .candidate-row {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            padding: 0.5rem 0;
+
+            border-bottom: 1px solid #e2e8f0;
+
+        }
+
+
+
+        .candidate-name {
+
+            font-weight: 500;
+
+        }
+
+
+
+        .vote-count {
+
+            background: #edf2f7;
+
+            padding: 0.2rem 0.5rem;
+
+            border-radius: 1rem;
+
+            font-size: 0.8rem;
+
+            font-weight: 600;
+
+        }
+
+
+
+        .btn-view-results {
+
+            background: #4299e1;
+
+            color: white;
+
+            border: none;
+
+            padding: 0.4rem 0.8rem;
+
+            border-radius: 0.5rem;
+
+            cursor: pointer;
+
+            font-size: 0.8rem;
+
+            margin-top: 0.5rem;
+
+        }
+
+
+
+        .btn-delete {
+
+            background: #fc8181;
+
+            color: white;
+
+            border: none;
+
+            padding: 0.3rem 0.7rem;
+
+            border-radius: 0.5rem;
+
+            cursor: pointer;
+
+            font-size: 0.75rem;
+
+            margin-left: 0.5rem;
+
+        }
+
+
+
+        /* Toast */
+
+        .toast {
+
+            position: fixed;
+
+            bottom: 2rem;
+
+            right: 2rem;
+
+            background: #2d3748;
+
+            color: white;
+
+            padding: 1rem 1.5rem;
+
+            border-radius: 0.5rem;
+
+            animation: slideIn 0.3s ease;
+
+            z-index: 1000;
+
+        }
+
+
+
+        @keyframes slideIn {
+
+            from {
+
+                transform: translateX(100%);
+
+                opacity: 0;
+
+            }
+
+            to {
+
+                transform: translateX(0);
+
+                opacity: 1;
+
+            }
+
+        }
+
+
+
+        .stats {
+
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+
+            color: white;
+
+            padding: 1rem;
+
+            border-radius: 0.5rem;
+
+            margin-bottom: 1rem;
+
+            text-align: center;
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <!-- Add this right after <body> -->
+<div id="loginOverlay" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:9999;justify-content:center;align-items:center;">
+  <div style="background:white;padding:2rem;border-radius:1rem;width:300px">
+    <h3 style="margin-bottom:1rem">Admin Login</h3>
+    <input type="password" id="loginPassword" placeholder="Password" style="width:100%;padding:0.75rem;margin-bottom:0.5rem;border:1px solid #e2e8f0;border-radius:0.5rem" />
+    <div id="loginError" style="color:red;font-size:0.85rem;margin-bottom:0.5rem"></div>
+    <button onclick="adminLogin()" style="width:100%;background:#9f7aea;color:white;border:none;padding:0.75rem;border-radius:0.5rem;cursor:pointer">Login</button>
+  </div>
+</div>
+
+
+
+    <div class="container">
+
+        <div class="header">
+
+            <div class="logo">
+
+                <h1>🗳️ EcoVote <span>Administrator Dashboard</span></h1>
+
+            </div>
+
+            <div class="admin-badge">
+
+                <i class="fas fa-shield-alt"></i> Admin Access
+
+            </div>
+
+        </div>
+
+
+
+        <div class="dashboard-grid">
+
+            <!-- Create Election Card -->
+
+            <div class="card">
+
+                <div class="card-title">
+
+                    <i class="fas fa-plus-circle"></i> Create New Election
+
+                </div>
+
+                <form id="createElectionForm">
+
+                    <div class="form-group">
+
+                        <label for="electionTitle">Election Title *</label>
+
+                        <input type="text" id="electionTitle" required placeholder="e.g., Presidential Election 2026">
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label for="electionDesc">Description</label>
+
+                        <textarea id="electionDesc" rows="3" placeholder="Describe the purpose of this election"></textarea>
+
+                    </div>
+
+                    <button type="submit" class="btn-primary">
+
+                        <i class="fas fa-plus"></i> Create Election
+
+                    </button>
+
+                </form>
+
+            </div>
+
+
+
+            <!-- Add Candidate Card -->
+
+            <div class="card">
+
+                <div class="card-title">
+
+                    <i class="fas fa-user-plus"></i> Add Candidate
+
+                </div>
+
+                <form id="addCandidateForm">
+
+                    <div class="form-group">
+
+                        <label for="electionSelect">Select Election *</label>
+
+                        <select id="electionSelect" required>
+
+                            <option value="">-- Select Election --</option>
+
+                        </select>
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label for="candidateName">Candidate Name *</label>
+
+                        <input type="text" id="candidateName" required placeholder="Full name">
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label for="candidateParty">Party / Affiliation</label>
+
+                        <input type="text" id="candidateParty" placeholder="e.g., Reform Party">
+
+                    </div>
+
+                    <button type="submit" class="btn-primary">
+
+                        <i class="fas fa-plus"></i> Add Candidate
+
+                    </button>
+
+                </form>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- Manage Elections Card -->
+
+        <div class="card">
+
+            <div class="card-title">
+
+                <i class="fas fa-chart-bar"></i> Manage Elections & View Results
+
+            </div>
+
+            <div id="electionsContainer">
+
+                <!-- Elections will be listed here -->
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <script>
+
+        // Data structure
+
+        let elections = [];
+
+
+
+        // Load data from localStorage
+
+        function loadData() {
+
+            const stored = localStorage.getItem('voting_system_data');
+
+            if (stored) {
+
+                elections = JSON.parse(stored);
+
+            } else {
+
+                // Initialize with sample data
+
+                elections = [
+
+                    {
+
+                        id: "e1",
+
+                        title: "Student Council President 2026",
+
+                        description: "Vote for your next student council president",
+
+                        candidates: [
+
+                            { id: "c1", name: "Amara Okafor", party: "Vision Alliance", votes: 42 },
+
+                            { id: "c2", name: "Rui Junior", party: "Innovation Front", votes: 28 },
+
+                            { id: "c3", name: "Ikenna Macdonald", party: "Unity Bloc", votes: 19 }
+
+                        ],
+
+                        status: "active"
+
+                    },
+
+                    {
+
+                        id: "e2",
+
+                        title: "Class Representative - Computer Science",
+
+                        description: "Elect your CS department representative",
+
+                        candidates: [
+
+                            { id: "c4", name: "Alfredo Nhantumbo", party: "Tech Reform", votes: 15 },
+
+                            { id: "c5", name: "Zara Kamara", party: "Digital Rights", votes: 24 }
+
+                        ],
+
+                        status: "active"
+
+                    }
+
+                ];
+
+                saveData();
+
+            }
+
+        }
+
+
+
+        function saveData() {
+
+            localStorage.setItem('voting_system_data', JSON.stringify(elections));
+
+            // Trigger storage event for other tabs (user panel)
+
+            window.dispatchEvent(new StorageEvent('storage', {
+
+                key: 'voting_system_data',
+
+                newValue: JSON.stringify(elections)
+
+            }));
+
+        }
+
+
+
+        // Render elections list
+
+        function renderElections() {
+
+            const container = document.getElementById('electionsContainer');
+
+            const select = document.getElementById('electionSelect');
+
+            
+
+            if (elections.length === 0) {
+
+                container.innerHTML = '<p style="text-align: center; color: #718096;">No elections created yet. Use the form to create one.</p>';
+
+                if (select) select.innerHTML = '<option value="">-- No Elections Available --</option>';
+
+                return;
+
+            }
+
+
+
+            // Update select dropdown
+
+            select.innerHTML = '<option value="">-- Select Election --</option>' + 
+
+                elections.map(e => `<option value="${e.id}">${escapeHtml(e.title)}</option>`).join('');
+
+
+
+            // Render election cards
+
+            container.innerHTML = elections.map(election => `
+
+                <div class="election-item">
+
+                    <div class="election-header">
+
+                        <div>
+
+                            <div class="election-title">${escapeHtml(election.title)}</div>
+
+                            <div style="font-size: 0.85rem; color: #718096; margin-top: 0.25rem;">
+
+                                ${escapeHtml(election.description || 'No description')}
+
+                            </div>
+
+                        </div>
+
+                        <div class="election-status">
+
+                            <i class="fas fa-circle" style="font-size: 0.5rem;"></i> ${election.status}
+
+                        </div>
+
+                    </div>
+
+                    
+
+                    <div class="candidate-list">
+
+                        <strong><i class="fas fa-users"></i> Candidates (${election.candidates.length})</strong>
+
+                        ${election.candidates.map(candidate => `
+
+                            <div class="candidate-row">
+
+                                <div>
+
+                                    <span class="candidate-name">${escapeHtml(candidate.name)}</span>
+
+                                    ${candidate.party ? `<span style="font-size: 0.75rem; color: #718096;"> (${escapeHtml(candidate.party)})</span>` : ''}
+
+                                </div>
+
+                                <div class="vote-count">
+
+                                    <i class="fas fa-vote-yea"></i> ${candidate.votes || 0} votes
+
+                                </div>
+
+                            </div>
+
+                        `).join('')}
+
+                    </div>
+
+                    
+
+                    <div style="display: flex; gap: 0.5rem; margin-top: 0.75rem;">
+
+                        <button class="btn-view-results" onclick="viewResults('${election.id}')">
+
+                            <i class="fas fa-chart-pie"></i> View Detailed Results
+
+                        </button>
+
+                        <button class="btn-delete" onclick="deleteElection('${election.id}')">
+
+                            <i class="fas fa-trash"></i> Delete Election
+
+                        </button>
+
+                    </div>
+
+                    
+
+                    <div style="margin-top: 0.75rem; font-size: 0.8rem; color: #4299e1;">
+
+                        <i class="fas fa-chart-line"></i> Total Votes Cast: ${election.candidates.reduce((sum, c) => sum + (c.votes || 0), 0)}
+
+                    </div>
+
+                </div>
+
+            `).join('');
+
+        }
+
+
+
+        // Create new election
+
+        function createElection(title, description) {
+
+            const newElection = {
+
+                id: 'e_' + Date.now() + '_' + Math.random().toString(36).substr(2, 6),
+
+                title: title,
+
+                description: description || 'No description provided',
+
+                candidates: [],
+
+                status: 'active'
+
+            };
+
+            elections.push(newElection);
+
+            saveData();
+
+            renderElections();
+
+            showToast(`Election "${title}" created successfully!`, 'success');
+
+        }
+
+
+
+        // Add candidate to election
+
+        function addCandidate(electionId, candidateName, candidateParty) {
+
+            const election = elections.find(e => e.id === electionId);
+
+            if (!election) {
+
+                showToast('Election not found!', 'error');
+
+                return false;
+
+            }
+
+
+
+            const newCandidate = {
+
+                id: 'c_' + Date.now() + '_' + Math.random().toString(36).substr(2, 6),
+
+                name: candidateName,
+
+                party: candidateParty || 'Independent',
+
+                votes: 0
+
+            };
+
+            
+
+            election.candidates.push(newCandidate);
+
+            saveData();
+
+            renderElections();
+
+            showToast(`Candidate "${candidateName}" added to ${election.title}!`, 'success');
+
+            return true;
+
+        }
+
+
+
+        // Delete election
+
+        function deleteElection(electionId) {
+
+            if (confirm('Are you sure you want to delete this election? This action cannot be undone.')) {
+
+                elections = elections.filter(e => e.id !== electionId);
+
+                saveData();
+
+                renderElections();
+
+                showToast('Election deleted successfully!', 'success');
+
+            }
+
+        }
+
+
+
+        // View detailed results
+
+        function viewResults(electionId) {
+
+            const election = elections.find(e => e.id === electionId);
+
+            if (!election) return;
+
+
+
+            let resultsMessage = `🏆 RESULTS: ${election.title} 🏆\n\n`;
+
+            resultsMessage += `Total Votes Cast: ${election.candidates.reduce((sum, c) => sum + (c.votes || 0), 0)}\n\n`;
+
+            resultsMessage += `Candidate Results:\n`;
+
+            resultsMessage += `─'.repeat(40)\n`;
+
+            
+
+            const sortedCandidates = [...election.candidates].sort((a, b) => (b.votes || 0) - (a.votes || 0));
+
+            sortedCandidates.forEach((candidate, index) => {
+
+                const medal = index === 0 ? '🥇 ' : index === 1 ? '🥈 ' : index === 2 ? '🥉 ' : '   ';
+
+                resultsMessage += `${medal} ${candidate.name}${candidate.party ? ` (${candidate.party})` : ''}: ${candidate.votes || 0} votes\n`;
+
+            });
+
+            
+
+            alert(resultsMessage);
+
+        }
+
+
+
+        function escapeHtml(str) {
+
+            if (!str) return '';
+
+            return str.replace(/[&<>]/g, function(m) {
+
+                if (m === '&') return '&amp;';
+
+                if (m === '<') return '&lt;';
+
+                if (m === '>') return '&gt;';
+
+                return m;
+
+            });
+
+        }
+
+
+
+        function showToast(message, type) {
+
+            const toast = document.createElement('div');
+
+            toast.className = 'toast';
+
+            toast.style.background = type === 'success' ? '#48bb78' : '#f56565';
+
+            toast.innerHTML = `<i class="fas ${type === 'success' ? 'fa-check-circle' : 'fa-exclamation-circle'}"></i> ${message}`;
+
+            document.body.appendChild(toast);
+
+            setTimeout(() => toast.remove(), 3000);
+
+        }
+
+
+
+        // Form handlers
+
+        document.getElementById('createElectionForm').addEventListener('submit', (e) => {
+
+            e.preventDefault();
+
+            const title = document.getElementById('electionTitle').value.trim();
+
+            const description = document.getElementById('electionDesc').value.trim();
+
+            
+
+            if (!title) {
+
+                showToast('Please enter an election title', 'error');
+
+                return;
+
+            }
+
+            
+
+            createElection(title, description);
+
+            e.target.reset();
+
+        });
+
+
+
+        document.getElementById('addCandidateForm').addEventListener('submit', (e) => {
+
+            e.preventDefault();
+
+            const electionId = document.getElementById('electionSelect').value;
+
+            const candidateName = document.getElementById('candidateName').value.trim();
+
+            const candidateParty = document.getElementById('candidateParty').value.trim();
+
+            
+
+            if (!electionId) {
+
+                showToast('Please select an election', 'error');
+
+                return;
+
+            }
+
+            
+
+            if (!candidateName) {
+
+                showToast('Please enter candidate name', 'error');
+
+                return;
+
+            }
+
+            
+
+            addCandidate(electionId, candidateName, candidateParty);
+
+            e.target.reset();
+
+            document.getElementById('candidateParty').value = '';
+
+        });
+
+
+
+        // Initialize
+
+        loadData();
+
+        renderElections();
+<script src="scripts/admin.js"/>
+    </script>
+
+</body>
+
+</html>

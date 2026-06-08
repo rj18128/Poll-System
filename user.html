@@ -1,0 +1,1056 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Voter Portal | EcoVote</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <style>
+
+        * {
+
+            margin: 0;
+
+            padding: 0;
+
+            box-sizing: border-box;
+
+        }
+
+
+
+        body {
+
+            font-family: 'Inter', sans-serif;
+
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+
+            min-height: 100vh;
+
+        }
+
+
+
+        .container {
+
+            max-width: 1200px;
+
+            margin: 0 auto;
+
+            padding: 2rem;
+
+        }
+
+
+
+        /* Header */
+
+        .header {
+
+            background: rgba(255,255,255,0.95);
+
+            border-radius: 1rem;
+
+            padding: 1.5rem 2rem;
+
+            margin-bottom: 2rem;
+
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            flex-wrap: wrap;
+
+        }
+
+
+
+        .logo h1 {
+
+            font-size: 1.8rem;
+
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+
+            -webkit-background-clip: text;
+
+            background-clip: text;
+
+            color: transparent;
+
+        }
+
+
+
+        .user-info {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 1rem;
+
+        }
+
+
+
+        .user-badge {
+
+            background: #667eea;
+
+            color: white;
+
+            padding: 0.5rem 1rem;
+
+            border-radius: 2rem;
+
+            font-size: 0.9rem;
+
+        }
+
+
+
+        /* Main Card */
+
+        .main-card {
+
+            background: white;
+
+            border-radius: 1.5rem;
+
+            padding: 2rem;
+
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+
+        }
+
+
+
+        .section-title {
+
+            font-size: 1.8rem;
+
+            font-weight: 700;
+
+            margin-bottom: 0.5rem;
+
+            color: #2d3748;
+
+        }
+
+
+
+        .subtitle {
+
+            color: #718096;
+
+            margin-bottom: 2rem;
+
+            border-left: 3px solid #667eea;
+
+            padding-left: 1rem;
+
+        }
+
+
+
+        /* Election Grid */
+
+        .election-grid {
+
+            display: grid;
+
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+
+            gap: 1.5rem;
+
+            margin-bottom: 2rem;
+
+        }
+
+
+
+        .election-card {
+
+            background: #f7fafc;
+
+            border-radius: 1rem;
+
+            padding: 1.5rem;
+
+            cursor: pointer;
+
+            transition: all 0.3s ease;
+
+            border: 2px solid transparent;
+
+        }
+
+
+
+        .election-card:hover {
+
+            transform: translateY(-5px);
+
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+
+        }
+
+
+
+        .election-card.selected {
+
+            border-color: #667eea;
+
+            background: white;
+
+            box-shadow: 0 10px 25px rgba(102,126,234,0.2);
+
+        }
+
+
+
+        .election-title {
+
+            font-size: 1.3rem;
+
+            font-weight: 700;
+
+            color: #2d3748;
+
+            margin-bottom: 0.5rem;
+
+        }
+
+
+
+        .election-status {
+
+            display: inline-block;
+
+            background: #48bb78;
+
+            color: white;
+
+            font-size: 0.7rem;
+
+            padding: 0.2rem 0.7rem;
+
+            border-radius: 1rem;
+
+            margin-bottom: 0.8rem;
+
+        }
+
+
+
+        .election-desc {
+
+            color: #718096;
+
+            font-size: 0.9rem;
+
+            margin-bottom: 1rem;
+
+        }
+
+
+
+        .candidate-count {
+
+            color: #a0aec0;
+
+            font-size: 0.8rem;
+
+        }
+
+
+
+        /* Candidates Section */
+
+        .candidates-section {
+
+            margin-top: 2rem;
+
+            padding-top: 2rem;
+
+            border-top: 2px solid #e2e8f0;
+
+        }
+
+
+
+        .candidates-title {
+
+            font-size: 1.4rem;
+
+            margin-bottom: 1rem;
+
+            color: #2d3748;
+
+        }
+
+
+
+        .candidate-list {
+
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 1rem;
+
+        }
+
+
+
+        .candidate-item {
+
+            background: #f7fafc;
+
+            border-radius: 1rem;
+
+            padding: 1rem;
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            transition: all 0.2s;
+
+        }
+
+
+
+        .candidate-item:hover {
+
+            background: #edf2f7;
+
+        }
+
+
+
+        .candidate-info {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 1rem;
+
+        }
+
+
+
+        .candidate-avatar {
+
+            width: 50px;
+
+            height: 50px;
+
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+
+            border-radius: 50%;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            color: white;
+
+            font-weight: bold;
+
+            font-size: 1.2rem;
+
+        }
+
+
+
+        .candidate-details h4 {
+
+            font-size: 1.1rem;
+
+            margin-bottom: 0.2rem;
+
+        }
+
+
+
+        .candidate-party {
+
+            font-size: 0.85rem;
+
+            color: #718096;
+
+        }
+
+
+
+        .vote-btn {
+
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+
+            color: white;
+
+            border: none;
+
+            padding: 0.6rem 1.5rem;
+
+            border-radius: 2rem;
+
+            font-weight: 600;
+
+            cursor: pointer;
+
+            transition: transform 0.2s;
+
+        }
+
+
+
+        .vote-btn:hover:not(:disabled) {
+
+            transform: scale(1.05);
+
+        }
+
+
+
+        .vote-btn:disabled {
+
+            background: #cbd5e0;
+
+            cursor: not-allowed;
+
+        }
+
+
+
+        .voted-badge {
+
+            background: #48bb78;
+
+            color: white;
+
+            padding: 0.4rem 1rem;
+
+            border-radius: 2rem;
+
+            font-size: 0.85rem;
+
+        }
+
+
+
+        /* Toast Message */
+
+        .toast {
+
+            position: fixed;
+
+            bottom: 2rem;
+
+            right: 2rem;
+
+            background: #2d3748;
+
+            color: white;
+
+            padding: 1rem 1.5rem;
+
+            border-radius: 0.5rem;
+
+            animation: slideIn 0.3s ease;
+
+            z-index: 1000;
+
+        }
+
+
+
+        @keyframes slideIn {
+
+            from {
+
+                transform: translateX(100%);
+
+                opacity: 0;
+
+            }
+
+            to {
+
+                transform: translateX(0);
+
+                opacity: 1;
+
+            }
+
+        }
+
+
+
+        .empty-state {
+
+            text-align: center;
+
+            padding: 3rem;
+
+            color: #718096;
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <div class="container">
+
+        <div class="header">
+
+            <div class="logo">
+
+                <h1>🗳️ EcoVote Voter Portal</h1>
+
+            </div>
+
+            <div class="user-info">
+
+                <div class="user-badge">
+
+                    <i class="fas fa-user"></i> Voter: Demo User
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="main-card">
+
+            <div class="section-title">Active Elections</div>
+
+            <div class="subtitle">Select an election to view candidates and cast your vote</div>
+
+
+
+            <div id="electionList" class="election-grid">
+
+                <!-- Elections will be loaded here -->
+
+            </div>
+
+
+
+            <div id="candidatesContainer" class="candidates-section" style="display: none;">
+
+                <!-- Candidates will be shown here -->
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <script>
+
+        // Data structure that matches backend expectations
+
+        let elections = [];
+
+        let votedElections = new Set();
+
+        let currentSelectedElection = null;
+
+
+
+        // Load data from localStorage (shared with admin)
+
+        function loadData() {
+
+            const stored = localStorage.getItem('voting_system_data');
+
+            if (stored) {
+
+                elections = JSON.parse(stored);
+
+            } else {
+
+                // Initialize with sample data
+
+                elections = [
+
+                    {
+
+                        id: "e1",
+
+                        title: "Student Council President 2026",
+
+                        description: "Vote for your next student council president",
+
+                        candidates: [
+
+                            { id: "c1", name: "Amara Okafor", party: "Vision Alliance", votes: 42 },
+
+                            { id: "c2", name: "Rui Junior", party: "Innovation Front", votes: 28 },
+
+                            { id: "c3", name: "Ikenna Macdonald", party: "Unity Bloc", votes: 19 }
+
+                        ],
+
+                        status: "active"
+
+                    },
+
+                    {
+
+                        id: "e2",
+
+                        title: "Class Representative - Computer Science",
+
+                        description: "Elect your CS department representative",
+
+                        candidates: [
+
+                            { id: "c4", name: "Alfredo Nhantumbo", party: "Tech Reform", votes: 15 },
+
+                            { id: "c5", name: "Zara Kamara", party: "Digital Rights", votes: 24 }
+
+                        ],
+
+                        status: "active"
+
+                    },
+
+                    {
+
+                        id: "e3",
+
+                        title: "Sports Committee Chair",
+
+                        description: "Choose the head of sports committee",
+
+                        candidates: [
+
+                            { id: "c6", name: "Michael Chen", party: "Athletes First", votes: 31 },
+
+                            { id: "c7", name: "Sarah Williams", party: "Sports for All", votes: 27 }
+
+                        ],
+
+                        status: "active"
+
+                    }
+
+                ];
+
+                saveData();
+
+            }
+
+            loadVotedRecords();
+
+        }
+
+
+
+        function saveData() {
+
+            localStorage.setItem('voting_system_data', JSON.stringify(elections));
+
+        }
+
+
+
+        function loadVotedRecords() {
+
+            const stored = localStorage.getItem('voter_history');
+
+            if (stored) {
+
+                votedElections = new Set(JSON.parse(stored));
+
+            }
+
+        }
+
+
+
+        function saveVotedRecords() {
+
+            localStorage.setItem('voter_history', JSON.stringify(Array.from(votedElections)));
+
+        }
+
+
+
+        // Render all active elections
+
+        function renderElections() {
+
+            const container = document.getElementById('electionList');
+
+            const activeElections = elections.filter(e => e.status === 'active');
+
+            
+
+            if (activeElections.length === 0) {
+
+                container.innerHTML = `
+
+                    <div class="empty-state">
+
+                        <i class="fas fa-info-circle" style="font-size: 3rem; margin-bottom: 1rem;"></i>
+
+                        <p>No active elections at the moment.</p>
+
+                        <p style="font-size: 0.9rem;">Please check back later.</p>
+
+                    </div>
+
+                `;
+
+                return;
+
+            }
+
+
+
+            container.innerHTML = activeElections.map(election => `
+
+                <div class="election-card" data-id="${election.id}">
+
+                    <div class="election-status">
+
+                        <i class="fas fa-circle" style="font-size: 0.5rem;"></i> Active
+
+                    </div>
+
+                    <div class="election-title">${escapeHtml(election.title)}</div>
+
+                    <div class="election-desc">${escapeHtml(election.description || 'No description provided')}</div>
+
+                    <div class="candidate-count">
+
+                        <i class="fas fa-users"></i> ${election.candidates.length} Candidates
+
+                    </div>
+
+                </div>
+
+            `).join('');
+
+
+
+            // Attach click events
+
+            document.querySelectorAll('.election-card').forEach(card => {
+
+                card.addEventListener('click', () => {
+
+                    const id = card.getAttribute('data-id');
+
+                    selectElection(id);
+
+                    document.querySelectorAll('.election-card').forEach(c => c.classList.remove('selected'));
+
+                    card.classList.add('selected');
+
+                });
+
+            });
+
+        }
+
+
+
+        // Select and display candidates for an election
+
+        function selectElection(electionId) {
+
+            const election = elections.find(e => e.id === electionId);
+
+            if (!election) return;
+
+            
+
+            currentSelectedElection = election;
+
+            const hasVoted = votedElections.has(election.id);
+
+            const container = document.getElementById('candidatesContainer');
+
+            
+
+            if (election.candidates.length === 0) {
+
+                container.innerHTML = `
+
+                    <div class="empty-state">
+
+                        <i class="fas fa-exclamation-triangle"></i>
+
+                        <p>No candidates have been added to this election yet.</p>
+
+                    </div>
+
+                `;
+
+                container.style.display = 'block';
+
+                return;
+
+            }
+
+
+
+            container.innerHTML = `
+
+                <div class="candidates-title">
+
+                    <i class="fas fa-person-booth"></i> Candidates for ${escapeHtml(election.title)}
+
+                </div>
+
+                <div class="candidate-list">
+
+                    ${election.candidates.map(candidate => `
+
+                        <div class="candidate-item">
+
+                            <div class="candidate-info">
+
+                                <div class="candidate-avatar">
+
+                                    ${candidate.name.charAt(0).toUpperCase()}
+
+                                </div>
+
+                                <div class="candidate-details">
+
+                                    <h4>${escapeHtml(candidate.name)}</h4>
+
+                                    <div class="candidate-party">
+
+                                        <i class="fas fa-tag"></i> ${escapeHtml(candidate.party || 'Independent')}
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                            ${hasVoted ? 
+
+                                '<div class="voted-badge"><i class="fas fa-check-circle"></i> Voted</div>' :
+
+                                `<button class="vote-btn" data-candidate-id="${candidate.id}">
+
+                                    <i class="fas fa-vote-yea"></i> Vote
+
+                                </button>`
+
+                            }
+
+                        </div>
+
+                    `).join('')}
+
+                </div>
+
+                ${hasVoted ? '<div style="margin-top: 1rem; padding: 1rem; background: #e6fffa; border-radius: 0.5rem;"><i class="fas fa-info-circle"></i> You have already cast your vote in this election.</div>' : ''}
+
+            `;
+
+
+
+            container.style.display = 'block';
+
+
+
+            // Attach vote handlers
+
+            if (!hasVoted) {
+
+                document.querySelectorAll('.vote-btn').forEach(btn => {
+
+                    btn.addEventListener('click', (e) => {
+
+                        e.stopPropagation();
+
+                        const candidateId = btn.getAttribute('data-candidate-id');
+
+                        castVote(election.id, candidateId);
+
+                    });
+
+                });
+
+            }
+
+        }
+
+
+
+        // Cast a vote
+
+        function castVote(electionId, candidateId) {
+
+            if (votedElections.has(electionId)) {
+
+                    showToast('You have already voted in this election!', 'error');
+
+                return;
+
+            }
+
+
+
+            const election = elections.find(e => e.id === electionId);
+
+            if (!election) return;
+
+
+
+            const candidate = election.candidates.find(c => c.id === candidateId);
+
+            if (!candidate) return;
+
+
+
+            // Increment vote count
+
+            candidate.votes = (candidate.votes || 0) + 1;
+
+            saveData();
+
+            
+
+            // Mark as voted
+
+            votedElections.add(electionId);
+
+            saveVotedRecords();
+
+            
+
+            showToast(`✓ You voted for ${candidate.name}! Your vote has been recorded.`, 'success');
+
+            
+
+            // Refresh the view
+
+            selectElection(electionId);
+
+            renderElections();
+
+        }
+
+
+
+        function escapeHtml(str) {
+
+            if (!str) return '';
+
+            return str.replace(/[&<>]/g, function(m) {
+
+                if (m === '&') return '&amp;';
+
+                if (m === '<') return '&lt;';
+
+                if (m === '>') return '&gt;';
+
+                return m;
+
+            });
+
+        }
+
+
+
+        function showToast(message, type) {
+
+            const toast = document.createElement('div');
+
+            toast.className = 'toast';
+
+            toast.style.background = type === 'success' ? '#48bb78' : '#f56565';
+
+            toast.innerHTML = `<i class="fas ${type === 'success' ? 'fa-check-circle' : 'fa-exclamation-circle'}"></i> ${message}`;
+
+            document.body.appendChild(toast);
+
+            setTimeout(() => toast.remove(), 3000);
+
+        }
+
+
+
+        // Listen for changes from admin panel (cross-tab communication)
+
+        window.addEventListener('storage', (e) => {
+
+            if (e.key === 'voting_system_data') {
+
+                loadData();
+
+                renderElections();
+
+                if (currentSelectedElection) {
+
+                    const stillExists = elections.find(e => e.id === currentSelectedElection.id);
+
+                    if (stillExists && stillExists.status === 'active') {
+
+                        selectElection(currentSelectedElection.id);
+
+                    } else {
+
+                        document.getElementById('candidatesContainer').style.display = 'none';
+
+                        currentSelectedElection = null;
+
+                    }
+
+                }
+
+            }
+
+        });
+
+
+
+        // Initialize
+
+        loadData();
+
+        renderElections();
+
+        <script src="scripts/user.js"/> 
+    </script>
+<script src="scripts/user.js"></script>
+</body>
+
+</html>
